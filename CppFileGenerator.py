@@ -1,4 +1,3 @@
-from ast import While
 from datetime import date
 import os
 import platform

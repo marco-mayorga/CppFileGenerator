@@ -1,3 +1,4 @@
+from ast import While
 from datetime import date
 import os
 import platform
@@ -17,6 +18,10 @@ Assignment Description*/
 
 
 def main():
+
+    # Moves to directory py script is stored
+    os.chdir(os.getcwd())
+
     # Checks if Mac OS
     if (platform.system() == "Darwin"):
         # clears screen
@@ -24,7 +29,8 @@ def main():
 
         # Asks for file name
         file_name = input("What is the file name: ")
-        # My name
+
+        # User name
         my_name = input("What is your name: ")
 
         # What course this is
@@ -34,25 +40,25 @@ def main():
         today = date.today()
         today_formatted = today.strftime("%B %d, %Y")
 
-        # assignment description
+        # Assignment description
         description = input("Copy and paste assignment description from d2l: ")
 
-        # asks user what chapter folder to put file in
         while True:
             try:
-                chapter_num = int(
-                    input("\nWhat chapter do I save the file to? (1-7): "))
-                break
+                where_save_file = input(
+                    "Do you have a folder you want to save it to?: (y or n): ")
+                if where_save_file == "y":
+                    os.system("clear")
+                    path = input("Give me PathName to desired location: ")
+                    os.chdir(path)
+                    os.system("clear")
+                    break
+                elif where_save_file == "n":
+                    os.system("clear")
+                    print("Saving to current location")
+                    break
             except:
-                os.system('clear')
-                print("\nTry a number from 1-7: ")
-
-        if chapter_num in range(1, 8):
-            os.system('clear')
-            print("File created!")
-
-        # changes to chapter folder
-        save_where(chapter_num)
+                print("Try y or n")
 
         # Creates cpp file
         with open(file_name + ".cpp", "w") as cppfile:
@@ -62,8 +68,9 @@ def main():
             # makes a basic cpp function under my info
             cppfile.write(
                 "#include <iostream>\n\nusing namespace std;\n\nint main()\n{\n\treturn 0;\n}")
+        print("File Creation succesful.")
 
-    # Checks if Windos
+    # Checks if Windows
     elif (platform.system() == "Windows"):
 
         # clears console
@@ -85,22 +92,24 @@ def main():
         # assignment description
         description = input("Copy and paste assignment description from d2l: ")
 
-        # asks user what chapter folder to put file in
+        # Where to Save File
         while True:
             try:
-                chapter_num = int(
-                    input("\nWhat chapter do I save the file to? (1-7): "))
-                break
+                where_save_file = input(
+                    "Do you have a folder you want to save it to?: (y or n): ")
+                if where_save_file == "y":
+                    os.system("cls")
+                    path = input("Give me PathName to desired location: ")
+                    os.chdir(path)
+                    os.system("cls")
+                    break
+                elif where_save_file == "n":
+                    # Saves file to current dir
+                    os.system("cls")
+                    print("Saving File to current location")
+                    break
             except:
-                os.system('cls')
-                print("\nTry a number from 1-7: ")
-
-        if chapter_num in range(1, 8):
-            os.system('cls')
-            print("File created!")
-
-        # changes to chapter folder
-        save_where(chapter_num)
+                print("Try y or n")
 
         # Creates cpp file
         with open(file_name + ".cpp", "w") as cppfile:
@@ -110,26 +119,7 @@ def main():
             # makes a basic cpp function under my info
             cppfile.write(
                 "#include <iostream>\n\nusing namespace std;\n\nint main()\n{\n\treturn 0;\n}")
-
-# chooses directory to move into
-
-
-def save_where(num):
-
-    if num == 1:
-        os.chdir("Chapter1")
-    elif num == 2:
-        os.chdir("Chapter2")
-    elif num == 3:
-        os.chdir("Chapter3")
-    elif num == 4:
-        os.chdir("Chapter4")
-    elif num == 5:
-        os.chdir("Chapter5")
-    elif num == 6:
-        os.chdir("Chapter6")
-    elif num == 7:
-        os.chdir("Chapter7")
+        print("File Creation succesful.")
 
 
 # calls the main function and runs it.
